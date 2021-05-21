@@ -72,18 +72,16 @@ public class TilesView extends View {
 
         int x = (int) event.getX();
         int y = (int) event.getY();
-        //      Log.d("myTag", "onTouchEvent: " + cards.get(3).color);
         if (event.getAction() == MotionEvent.ACTION_DOWN && !isOnPauseNow) {
             for (Card c : cards) {
-                if (c.changeColor(x, y)) { // TODO:  заменить условия 
-    
+                if (c.changeColor(x, y)) {     
                     if (c.color == colors.get(0)) {
                         nextColor = 1;
                     }
-                    if (c.color == colors.get(1)) {
+                    else if (c.color == colors.get(1)) {
                         nextColor = 2;
                     }
-                    if (c.color == colors.get(2)) {
+                    else if (c.color == colors.get(2)) {
                         nextColor = 0;
                     }
                     currentIndex = cards.indexOf(c);
@@ -94,8 +92,6 @@ public class TilesView extends View {
                     PauseTask task = new PauseTask();
                     task.execute();
                     return true;
-
-
                 }
             }
 
@@ -119,10 +115,18 @@ public class TilesView extends View {
         protected void onPostExecute(Void aVoid) {
             firstCard = cards.get(0);
             for (int i = 0; i < cards.size(); i++) {
-                if (cards.get(i).color == firstCard.color) counter++;  // TODO:  заменить условия 
-                if (cards.get(i).color == colors.get(0)) redCount ++;
-                if (cards.get(i).color == colors.get(1)) greenCount ++;
-                if (cards.get(i).color == colors.get(2)) blueCount ++;
+                if (cards.get(i).color == firstCard.color) counter++;  
+                switch(cards.get(i).color){
+                    case colors.get(0):
+                        redCount ++;
+                        break;
+                    case colors.get(1):
+                        greenCount ++;
+                        break;
+                    case colors.get(2):
+                        blueCount ++;
+                        break;
+                }
             }
             Log.d("myTag", "onPostExecute: " + counter);
             if (counter == 16) {
@@ -177,69 +181,69 @@ public class TilesView extends View {
 
     public void redrawLine(int currentIndex) {
         ArrayList<Integer> nextIndexes = new ArrayList<>();
-        if (currentIndex == 0) { // TODO:  заменить условия 
+        if (currentIndex == 0) { 
             nextIndexes.add(currentIndex + 1);
             nextIndexes.add(currentIndex + 4);
 
         }
 
-        if (currentIndex > 0 && currentIndex < 3) {
+        else if (currentIndex > 0 && currentIndex < 3) {
             nextIndexes.add(currentIndex + 1);
             nextIndexes.add(currentIndex - 1);
             nextIndexes.add(currentIndex + 4);
         }
 
-        if (currentIndex > 12 && currentIndex < 15) {
+        else if (currentIndex > 12 && currentIndex < 15) {
             nextIndexes.add(currentIndex + 1);
             nextIndexes.add(currentIndex - 1);
             nextIndexes.add(currentIndex - 4);
         }
 
-        if (currentIndex == 3) {
+        else if (currentIndex == 3) {
             nextIndexes.add(currentIndex - 1);
             nextIndexes.add(currentIndex + 4);
 
         }
 
-        if (currentIndex > 4 && currentIndex < 7 || currentIndex > 8 && currentIndex < 11) {
+        else if (currentIndex > 4 && currentIndex < 7 || currentIndex > 8 && currentIndex < 11) {
             nextIndexes.add(currentIndex + 1);
             nextIndexes.add(currentIndex - 1);
             nextIndexes.add(currentIndex + 4);
             nextIndexes.add(currentIndex - 4);
         }
 
-        if (currentIndex == 4 || currentIndex == 8) {
+        else if (currentIndex == 4 || currentIndex == 8) {
             nextIndexes.add(currentIndex + 4);
             nextIndexes.add(currentIndex - 4);
             nextIndexes.add(currentIndex + 1);
         }
 
-        if (currentIndex == 7 || currentIndex == 11) {
+        else if (currentIndex == 7 || currentIndex == 11) {
             nextIndexes.add(currentIndex + 4);
             nextIndexes.add(currentIndex - 4);
             nextIndexes.add(currentIndex - 1);
         }
 
-        if (currentIndex == 12) {
+        else if (currentIndex == 12) {
             nextIndexes.add(currentIndex + 1);
             nextIndexes.add(currentIndex - 4);
 
         }
 
-        if (currentIndex == 15) {
+                      else if (currentIndex == 15) {
             nextIndexes.add(currentIndex - 1);
             nextIndexes.add(currentIndex - 4);
 
         }
 
         for (Integer n : nextIndexes) {
-            if (cards.get(n).color == colors.get(0)) { //TODO:  заменить условия 
+            if (cards.get(n).color == colors.get(0)) {
                 nextColor = 1;
             }
-            if (cards.get(n).color == colors.get(1)) {
+            else if (cards.get(n).color == colors.get(1)) {
                 nextColor = 2;
             }
-            if (cards.get(n).color == colors.get(2)) {
+         else if (cards.get(n).color == colors.get(2)) {
                 nextColor = 0;
             }
             cards.get(n).color = colors.get(nextColor);
