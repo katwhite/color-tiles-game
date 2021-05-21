@@ -75,8 +75,8 @@ public class TilesView extends View {
         //      Log.d("myTag", "onTouchEvent: " + cards.get(3).color);
         if (event.getAction() == MotionEvent.ACTION_DOWN && !isOnPauseNow) {
             for (Card c : cards) {
-                if (c.changeColor(x, y)) {
-
+                if (c.changeColor(x, y)) { // TODO:  заменить условия 
+    
                     if (c.color == colors.get(0)) {
                         nextColor = 1;
                     }
@@ -119,7 +119,7 @@ public class TilesView extends View {
         protected void onPostExecute(Void aVoid) {
             firstCard = cards.get(0);
             for (int i = 0; i < cards.size(); i++) {
-                if (cards.get(i).color == firstCard.color) counter++;
+                if (cards.get(i).color == firstCard.color) counter++;  // TODO:  заменить условия 
                 if (cards.get(i).color == colors.get(0)) redCount ++;
                 if (cards.get(i).color == colors.get(1)) greenCount ++;
                 if (cards.get(i).color == colors.get(2)) blueCount ++;
@@ -177,7 +177,7 @@ public class TilesView extends View {
 
     public void redrawLine(int currentIndex) {
         ArrayList<Integer> nextIndexes = new ArrayList<>();
-        if (currentIndex == 0) {
+        if (currentIndex == 0) { // TODO:  заменить условия 
             nextIndexes.add(currentIndex + 1);
             nextIndexes.add(currentIndex + 4);
 
@@ -233,7 +233,7 @@ public class TilesView extends View {
         }
 
         for (Integer n : nextIndexes) {
-            if (cards.get(n).color == colors.get(0)) {
+            if (cards.get(n).color == colors.get(0)) { //TODO:  заменить условия 
                 nextColor = 1;
             }
             if (cards.get(n).color == colors.get(1)) {
